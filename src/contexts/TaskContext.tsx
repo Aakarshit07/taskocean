@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { 
   db, 
@@ -15,7 +14,7 @@ import {
   serverTimestamp
 } from '@/lib/firebase';
 import { useAuth } from './AuthContext';
-import { toast } from '@/components/ui/sonner';
+import { toast } from '@/lib/toast';
 
 export type TaskCategory = 'work' | 'personal' | 'education' | 'health' | 'finance' | 'other';
 
@@ -142,7 +141,6 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       if (!currentUser) throw new Error("User not authenticated");
       
-      // Find the highest order number for tasks with the same status
       const tasksWithSameStatus = tasks.filter(t => t.status === task.status);
       const highestOrder = tasksWithSameStatus.reduce((max, t) => Math.max(max, t.order), -1);
       
@@ -185,7 +183,6 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
         details: Object.keys(updates).join(', ')
       };
       
-      // Add the new history entry to the history array
       const updatedHistory = [...task.history, historyEntry];
       
       await updateDoc(taskRef, {
@@ -275,7 +272,6 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       if (!task) throw new Error("Task not found");
       
-      // Find the highest order number for tasks with the new status
       const tasksWithNewStatus = tasks.filter(t => t.status === newStatus);
       const highestOrder = tasksWithNewStatus.reduce((max, t) => Math.max(max, t.order), -1);
       
@@ -317,7 +313,6 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       if (!task) throw new Error("Task not found");
       
-      // If the status is changing, we need to update it
       if (sourceStatus !== destinationStatus) {
         const historyEntry = {
           id: Date.now().toString(),
@@ -334,7 +329,6 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
           history: [...task.history, historyEntry],
         });
       } else {
-        // Just update the order
         const taskRef = doc(db, 'tasks', taskId);
         batch.update(taskRef, {
           order: newOrder,
@@ -342,7 +336,6 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
         });
       }
       
-      // Update the order of all other affected tasks
       const affectedTasks = tasks.filter(t => 
         t.id !== taskId && 
         t.status === destinationStatus && 
@@ -366,7 +359,6 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const getTags = () => {
-    // Get unique tags from all tasks
     const allTags: TaskTag[] = [];
     tasks.forEach(task => {
       task.tags.forEach(tag => {

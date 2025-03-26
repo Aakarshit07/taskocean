@@ -1,8 +1,7 @@
-
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where, writeBatch, deleteDoc, onSnapshot, addDoc, Timestamp, serverTimestamp } from 'firebase/firestore';
-import { toast } from "@/components/ui/sonner";
+import { toast } from "@/lib/toast";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {

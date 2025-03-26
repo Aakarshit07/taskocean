@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { 
   signInWithPopup, 
@@ -7,7 +6,7 @@ import {
   User
 } from 'firebase/auth';
 import { auth, googleProvider, createUserDocument } from '@/lib/firebase';
-import { toast } from '@/components/ui/sonner';
+import { toast } from '@/lib/toast';
 
 interface AuthContextType {
   currentUser: User | null;

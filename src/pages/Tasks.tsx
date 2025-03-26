@@ -187,7 +187,7 @@ const Tasks = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     draggable
-                    onDragStart={(e) => handleDragStart(e, task.id)}
+                    onDragStart={(e: React.DragEvent) => handleDragStart(e, task.id)}
                   >
                     <TaskItem task={task} onEdit={handleEditTask} />
                   </motion.div>
@@ -227,7 +227,7 @@ const Tasks = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     draggable
-                    onDragStart={(e) => handleDragStart(e, task.id)}
+                    onDragStart={(e: React.DragEvent) => handleDragStart(e, task.id)}
                   >
                     <TaskItem task={task} onEdit={handleEditTask} />
                   </motion.div>
@@ -258,7 +258,7 @@ const Tasks = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     draggable
-                    onDragStart={(e) => handleDragStart(e, task.id)}
+                    onDragStart={(e: React.DragEvent) => handleDragStart(e, task.id)}
                   >
                     <TaskItem task={task} onEdit={handleEditTask} />
                   </motion.div>
