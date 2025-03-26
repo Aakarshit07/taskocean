@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Task, TaskStatus, useTasks } from '@/contexts/TaskContext';
 import { Button } from '@/components/ui/button';
@@ -169,7 +168,6 @@ const Tasks = () => {
 
       {view === 'board' ? (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {/* Todo Column */}
           <div
             className="glass rounded-lg p-4"
             onDragOver={handleDragOver}
@@ -179,18 +177,21 @@ const Tasks = () => {
             <div className="space-y-4">
               {filteredTasks.todo.length > 0 ? (
                 filteredTasks.todo.map(task => (
-                  <motion.div
+                  <div
                     key={task.id}
-                    layoutId={task.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
                     draggable
-                    onDragStart={(e: React.DragEvent) => handleDragStart(e, task.id)}
+                    onDragStart={(e) => handleDragStart(e, task.id)}
                   >
-                    <TaskItem task={task} onEdit={handleEditTask} />
-                  </motion.div>
+                    <motion.div
+                      layoutId={task.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <TaskItem task={task} onEdit={handleEditTask} />
+                    </motion.div>
+                  </div>
                 ))
               ) : (
                 <div className="flex flex-col items-center justify-center rounded-lg bg-secondary p-6 text-center">
@@ -209,7 +210,6 @@ const Tasks = () => {
             </div>
           </div>
 
-          {/* In Progress Column */}
           <div
             className="glass rounded-lg p-4"
             onDragOver={handleDragOver}
@@ -219,18 +219,21 @@ const Tasks = () => {
             <div className="space-y-4">
               {filteredTasks['in-progress'].length > 0 ? (
                 filteredTasks['in-progress'].map(task => (
-                  <motion.div
+                  <div
                     key={task.id}
-                    layoutId={task.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
                     draggable
-                    onDragStart={(e: React.DragEvent) => handleDragStart(e, task.id)}
+                    onDragStart={(e) => handleDragStart(e, task.id)}
                   >
-                    <TaskItem task={task} onEdit={handleEditTask} />
-                  </motion.div>
+                    <motion.div
+                      layoutId={task.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <TaskItem task={task} onEdit={handleEditTask} />
+                    </motion.div>
+                  </div>
                 ))
               ) : (
                 <div className="flex flex-col items-center justify-center rounded-lg bg-secondary p-6 text-center">
@@ -240,7 +243,6 @@ const Tasks = () => {
             </div>
           </div>
 
-          {/* Completed Column */}
           <div
             className="glass rounded-lg p-4"
             onDragOver={handleDragOver}
@@ -250,18 +252,21 @@ const Tasks = () => {
             <div className="space-y-4">
               {filteredTasks.completed.length > 0 ? (
                 filteredTasks.completed.map(task => (
-                  <motion.div
+                  <div
                     key={task.id}
-                    layoutId={task.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
                     draggable
-                    onDragStart={(e: React.DragEvent) => handleDragStart(e, task.id)}
+                    onDragStart={(e) => handleDragStart(e, task.id)}
                   >
-                    <TaskItem task={task} onEdit={handleEditTask} />
-                  </motion.div>
+                    <motion.div
+                      layoutId={task.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <TaskItem task={task} onEdit={handleEditTask} />
+                    </motion.div>
+                  </div>
                 ))
               ) : (
                 <div className="flex flex-col items-center justify-center rounded-lg bg-secondary p-6 text-center">
@@ -282,12 +287,10 @@ const Tasks = () => {
                   (task.description && task.description.toLowerCase().includes(searchQuery.toLowerCase()))
                 )
                 .sort((a, b) => {
-                  // Sort by status: todo, in-progress, completed
                   const statusOrder = { 'todo': 0, 'in-progress': 1, 'completed': 2 };
                   const statusDiff = statusOrder[a.status] - statusOrder[b.status];
                   if (statusDiff !== 0) return statusDiff;
                   
-                  // Then by due date (if exists)
                   if (a.dueDate && b.dueDate) {
                     return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
                   } else if (a.dueDate) {
@@ -296,7 +299,6 @@ const Tasks = () => {
                     return 1;
                   }
                   
-                  // Fallback to created date
                   return a.createdAt.getTime() - b.createdAt.getTime();
                 })
                 .map(task => (
