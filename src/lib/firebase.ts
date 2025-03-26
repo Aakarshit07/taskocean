@@ -5,12 +5,13 @@ import { toast } from "@/lib/toast";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAj-PUUbh69eW3MVc1B3zLGQh_pOmJxE6M",
-  authDomain: "taskmanager-lovable.firebaseapp.com",
-  projectId: "taskmanager-lovable",
-  storageBucket: "taskmanager-lovable.appspot.com",
-  messagingSenderId: "517773188119",
-  appId: "1:517773188119:web:e7db74f5ccff2af9f5fa21"
+  apiKey: process.env.VITE_FIREBASE_API_KEY,
+  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.VITE_FIREBASE_APP_ID,
+  measurementId: process.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase

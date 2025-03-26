@@ -1,0 +1,11 @@
+{
+    "hosting": {
+      "site": "taskocean",
+      "public": "public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
+    } 
+  }
